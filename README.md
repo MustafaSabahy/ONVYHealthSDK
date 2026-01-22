@@ -22,6 +22,12 @@ The goal of this project is not to be a full product, but a realistic, productio
 
 ---
 
+
+### Walkthrough
+[![App Demo](https://img.youtube.com/vi/1gdANEV0PyY/0.jpg)](https://youtube.com/shorts/8VqYKhl8VAQ?si=Kud2LksGAjLqEHT-)
+
+
+
 ##  Architecture
 
 ### High-Level Design
