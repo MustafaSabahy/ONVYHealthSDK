@@ -24,7 +24,7 @@ The goal of this project is not to be a full product, but a realistic, productio
 
 
 ### Walkthrough
-![SimulatorScreenRecording-iPhone15-2026-01-22at23 07 15-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/2892decd-fb6b-4e8f-a1b6-ea69061f3284)
+![App Demo][SimulatorScreenRecording-iPhone15-2026-01-22at23 07 15-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/2892decd-fb6b-4e8f-a1b6-ea69061f3284)
 
 
 
