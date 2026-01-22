@@ -1,0 +1,158 @@
+name: React Native CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'react-native-bridge/**'
+      - 'demo-app/**'
+      - '.github/workflows/react-native-ci.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'react-native-bridge/**'
+      - 'demo-app/**'
+      - '.github/workflows/react-native-ci.yml'
+
+jobs:
+  type-check:
+    name: TypeScript Type Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: |
+            react-native-bridge/package.json
+            demo-app/package.json
+      
+      - name: Install dependencies
+        run: |
+          cd react-native-bridge && npm ci
+          cd ../demo-app && npm ci
+      
+      - name: Run TypeScript type check
+        run: |
+          cd react-native-bridge
+          npx tsc --noEmit --skipLibCheck
+          cd ../demo-app
+          npx tsc --noEmit --skipLibCheck
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: |
+          cd react-native-bridge && npm ci
+          cd ../demo-app && npm ci
+      
+      - name: Run unit tests
+        run: |
+          cd react-native-bridge
+          npm test -- --coverage
+      
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./react-native-bridge/coverage/lcov.info
+          flags: react-native
+          name: react-native-coverage
+
+  lint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: |
+          cd react-native-bridge && npm ci
+          cd ../demo-app && npm ci
+      
+      - name: Run ESLint
+        run: |
+          cd react-native-bridge
+          npx eslint . --ext .ts,.tsx --max-warnings 0
+          cd ../demo-app
+          npx eslint . --ext .ts,.tsx --max-warnings 0
+
+  build-ios:
+    name: Build iOS
+    runs-on: macos-14
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: |
+          cd demo-app && npm ci
+      
+      - name: Build iOS
+        run: |
+          cd demo-app
+          npx expo prebuild --platform ios
+          xcodebuild -workspace ios/*.xcworkspace \
+            -scheme demo-app \
+            -configuration Release \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            build
+
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      - name: Install dependencies
+        run: |
+          cd demo-app && npm ci
+      
+      - name: Build Android
+        run: |
+          cd demo-app
+          npx expo prebuild --platform android
+          cd android
+          ./gradlew assembleRelease

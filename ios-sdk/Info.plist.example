@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- HealthKit Usage Descriptions -->
+	<key>NSHealthShareUsageDescription</key>
+	<string>We need access to your health data to provide personalized health insights and track your fitness progress.</string>
+	
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>We need permission to update your health data to keep your records accurate.</string>
+	
+	<!-- Optional: Clinical Health Records -->
+	<key>NSHealthClinicalHealthRecordsShareUsageDescription</key>
+	<string>We need access to your clinical health records to provide comprehensive health insights.</string>
+</dict>
+</plist>

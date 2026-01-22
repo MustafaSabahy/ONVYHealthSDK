@@ -1,0 +1,48 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-commit checks..."
+
+# Run SwiftLint
+if [ -f ".swiftlint.yml" ]; then
+  echo "📝 Running SwiftLint..."
+  if command -v swiftlint > /dev/null; then
+    swiftlint lint --strict
+    if [ $? -ne 0 ]; then
+      echo "❌ SwiftLint found issues. Please fix them before committing."
+      exit 1
+    fi
+  else
+    echo "⚠️  SwiftLint not installed. Skipping..."
+  fi
+fi
+
+# Run TypeScript type check
+if [ -f "react-native-bridge/package.json" ]; then
+  echo "📝 Running TypeScript type check..."
+  cd react-native-bridge
+  if [ -f "node_modules/.bin/tsc" ]; then
+    npx tsc --noEmit --skipLibCheck
+    if [ $? -ne 0 ]; then
+      echo "❌ TypeScript type check failed. Please fix errors before committing."
+      exit 1
+    fi
+  fi
+  cd ..
+fi
+
+# Run ESLint
+if [ -f "react-native-bridge/package.json" ]; then
+  echo "📝 Running ESLint..."
+  cd react-native-bridge
+  if [ -f "node_modules/.bin/eslint" ]; then
+    npx eslint . --ext .ts,.tsx --max-warnings 0
+    if [ $? -ne 0 ]; then
+      echo "❌ ESLint found issues. Please fix them before committing."
+      exit 1
+    fi
+  fi
+  cd ..
+fi
+
+echo "✅ Pre-commit checks passed!"

@@ -1,0 +1,28 @@
+{
+  "name": "@onvy/react-native-healthkit",
+  "version": "1.0.0",
+  "description": "ONVY Health SDK - React Native bridge for Apple HealthKit",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "healthkit",
+    "health",
+    "fitness",
+    "onvy"
+  ],
+  "author": "ONVY HealthTech",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-native": ">=0.70.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.70.0",
+    "typescript": "^5.0.0"
+  }
+}
