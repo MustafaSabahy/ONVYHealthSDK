@@ -8,7 +8,7 @@ This project focuses on correctness, extensibility, and privacy, and is intended
 
 ---
 
-## 🎯 Project Overview
+##  Project Overview
 
 This SDK showcases:
 
@@ -22,7 +22,7 @@ The goal of this project is not to be a full product, but a realistic, productio
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ### High-Level Design
 
@@ -51,7 +51,7 @@ The SDK is split into three layers to keep responsibilities clear and make futur
 
 ---
 
-## 🧩 Core Components
+##  Core Components
 
 ### 1. iOS SDK (`ios-sdk/ONVYHealthSDK/`)
 
@@ -78,7 +78,7 @@ The SDK is split into three layers to keep responsibilities clear and make futur
 
 ---
 
-## 🚀 Features
+##  Features
 
 ### HealthKit Integration
 
@@ -110,7 +110,7 @@ The SDK is split into three layers to keep responsibilities clear and make futur
 
 ---
 
-## 📦 Installation
+##  Installation
 
 ### Requirements
 
@@ -132,7 +132,7 @@ The SDK is split into three layers to keep responsibilities clear and make futur
 
 ---
 
-## 💻 Usage Example
+##  Usage Example
 
 ```typescript
 import ONVYHealthKit from '@onvy/healthkit';
@@ -149,7 +149,7 @@ const unsubscribe = ONVYHealthKit.subscribeToSteps(data => {
 
 ---
 
-## 🔌 Multiple Data Sources
+## Multiple Data Sources
 
 The SDK is designed so that HealthKit is just one possible source.
 
@@ -162,7 +162,7 @@ New sources can be added by implementing `HealthDataSource` in Swift and registe
 
 ---
 
-## 🔐 Privacy & Security
+## Privacy & Security
 
 - User-controlled HealthKit permissions
 - No raw HealthKit samples exposed to JavaScript
@@ -172,7 +172,7 @@ New sources can be added by implementing `HealthDataSource` in Swift and registe
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 - Unit tests for core SDK components
 - Mock data sources for predictable test runs
@@ -180,7 +180,7 @@ New sources can be added by implementing `HealthDataSource` in Swift and registe
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ONVYHealthSDK/
@@ -212,6 +212,6 @@ ONVYHealthSDK/
 
 ---
 
-## 📝 License
+## License
 
 MIT — for demonstration and evaluation purposes.
